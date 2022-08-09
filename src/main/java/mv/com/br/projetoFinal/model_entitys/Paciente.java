@@ -1,11 +1,21 @@
 package mv.com.br.projetoFinal.model_entitys;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "Pacientes_mw")
 public class Paciente {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(length = 100, nullable = false)
     private String nome;
+    @Column(length = 20)
     private Long numero;
+    @Column(length = 3, nullable = false)
     private Long idade;
+    @ManyToOne
     private Medico medico;
 
     public Paciente(){

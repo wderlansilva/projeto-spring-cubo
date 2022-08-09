@@ -5,6 +5,7 @@ import mv.com.br.projetoFinal.model_entitys.Paciente;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class PacienteDto {
     private String nome;
@@ -21,16 +22,7 @@ public class PacienteDto {
 
     public static List<PacienteDto> converter(List<Paciente> listaPaciente) {
 
-        List<PacienteDto> listaPacienteDto = new ArrayList<>();
-
-        for(int i = 0; i < listaPaciente.size(); i++){
-
-            PacienteDto pacienteDto = new PacienteDto(listaPaciente.get(i));
-
-            listaPacienteDto.add(pacienteDto);
-        }
-
-        return listaPacienteDto;
+        return listaPaciente.stream().map(PacienteDto::new).collect(Collectors.toList());
     }
 
     public String getNome() {

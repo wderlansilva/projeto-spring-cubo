@@ -1,13 +1,23 @@
 package mv.com.br.projetoFinal.model_entitys;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "Medico_mw")
 public class Medico {
+
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
+    @Column(length = 100, nullable = false)
     public String nome;
+    @Column(length = 100, nullable = false)
     public String hospital;
+    @Column(length = 10, nullable = false)
     public Long crm;
 
-    public Medico(Long id, String nome, String hospital, Long crm) {
-        this.id = id;
+    public Medico(){}
+
+    public Medico(String nome, String hospital, Long crm) {
         this.nome = nome;
         this.hospital = hospital;
         this.crm = crm;

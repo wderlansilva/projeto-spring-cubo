@@ -26,11 +26,11 @@ public class Endpoint {
 
         Paciente paciente1 = new Paciente(
                 1L, "Wderlan", 123123L, 123L, new Medico(
-                        1L, "Marcos","Portugues", 1239L) );
+                        "Marcos","Portugues", 1239L) );
 
         Paciente paciente2 = new Paciente(
                 1L, "Jose", 123123L, 123L, new Medico(
-                        1L, "Lucas","Portugues", 1239L) );
+                        "Lucas","Portugues", 1239L) );
 
         return PacienteDto.converter(Arrays.asList(paciente1, paciente2));
     }
