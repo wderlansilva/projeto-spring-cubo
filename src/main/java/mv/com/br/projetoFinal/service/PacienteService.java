@@ -18,4 +18,9 @@ public class PacienteService  {
     @Autowired
     PacienteRepository pacienteRepository;
 
+    public List<Paciente> get(){
+       return  pacienteRepository.findAll();
+    }
+
+
 }

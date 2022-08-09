@@ -26,19 +26,7 @@ public class Endpoint {
 
     @RequestMapping("/")
     public List<PacienteDto> getPacientes(){
-
-        
-
-
-        Paciente paciente1 = new Paciente(
-                1L, "Wderlan", 123123L, 123L, new Medico(
-                        "Marcos","Portugues", 1239L) );
-
-        Paciente paciente2 = new Paciente(
-                1L, "Jose", 123123L, 123L, new Medico(
-                        "Lucas","Portugues", 1239L) );
-
-        return PacienteDto.converter(Arrays.asList(paciente1, paciente2));
+        return PacienteDto.converter(pacienteService.get());
     }
 
 }
