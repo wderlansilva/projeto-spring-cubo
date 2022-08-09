@@ -6,18 +6,18 @@ public class Paciente {
     private String nome;
     private Long numero;
     private Long idade;
-    private Medico idMedico;
+    private Medico medico;
 
     public Paciente(){
 
     }
 
-    public Paciente(Long id, String nome, Long numero, Long idade, Medico idMedico) {
+    public Paciente(Long id, String nome, Long numero, Long idade, Medico medico) {
         this.id = id;
         this.nome = nome;
         this.numero = numero;
         this.idade = idade;
-        this.idMedico = idMedico;
+        this.medico = medico;
     }
 
     public Long getId() {
@@ -52,11 +52,11 @@ public class Paciente {
         this.idade = idade;
     }
 
-    public Medico getIdMedico() {
-        return idMedico;
+    public Medico getMedico() {
+        return medico;
     }
 
-    public void setIdMedico(Medico idMedico) {
-        this.idMedico = idMedico;
+    public void setMedico(Medico medico) {
+        this.medico = medico;
     }
 }
