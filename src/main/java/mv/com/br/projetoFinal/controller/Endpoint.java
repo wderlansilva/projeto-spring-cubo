@@ -4,6 +4,7 @@ import mv.com.br.projetoFinal.dto.PacienteDto;
 import mv.com.br.projetoFinal.model_entitys.Medico;
 import mv.com.br.projetoFinal.model_entitys.Paciente;
 import mv.com.br.projetoFinal.service.PacienteService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,16 +18,19 @@ import java.util.List;
 @RequestMapping("/api/pacientes")
 public class Endpoint {
 
+    @Autowired
     PacienteService pacienteService;
+
+    @GetMapping("/")
+    public List<PacienteDto> getPacientes(){
+        return PacienteDto.converter(pacienteService.get());
+    }
 
     @GetMapping("/get")
     public String ola(){
         return "Olaa";
     }
 
-    @RequestMapping("/")
-    public List<PacienteDto> getPacientes(){
-        return PacienteDto.converter(pacienteService.get());
-    }
+
 
 }
