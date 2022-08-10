@@ -1,6 +1,7 @@
 package mv.com.br.projetoFinal.service;
 
 import mv.com.br.projetoFinal.model_entitys.Paciente;
+import mv.com.br.projetoFinal.repository.MedicoRepository;
 import mv.com.br.projetoFinal.repository.PacienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -19,8 +20,23 @@ public class PacienteService  {
     @Autowired
     PacienteRepository pacienteRepository;
 
+    @Autowired
+    MedicoRepository medicoRepository;
+
     public List<Paciente> get(){
        return  pacienteRepository.findAll();
     }
 
+
+    public List<Paciente> searchPacienteByNome(String nome) {
+        return pacienteRepository.findByNome(nome);
+    }
+
+    public List<Paciente> searchMedicoByNome(String nomeMedico) {
+        return pacienteRepository.findByMedico_Nome(nomeMedico);
+    }
+
+    public Paciente savePaciente(Paciente paciente) {
+        return pacienteRepository.save(paciente);
+    }
 }

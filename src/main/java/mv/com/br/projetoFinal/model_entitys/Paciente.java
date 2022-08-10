@@ -6,9 +6,9 @@ import javax.persistence.*;
 @Table(name = "Pacientes_mw")
 public class Paciente {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(length = 100, nullable = false)
     private String nome;
     @Column(length = 20)
@@ -22,8 +22,7 @@ public class Paciente {
 
     }
 
-    public Paciente(Long id, String nome, Long numero, Long idade, Medico medico) {
-        this.id = id;
+    public Paciente(String nome, Long numero, Long idade, Medico medico) {
         this.nome = nome;
         this.numero = numero;
         this.idade = idade;
