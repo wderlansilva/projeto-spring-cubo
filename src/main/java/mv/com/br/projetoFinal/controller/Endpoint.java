@@ -13,8 +13,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/pacientes")
@@ -47,10 +49,37 @@ public class Endpoint {
     }
 
     @PostMapping
-    public ResponseEntity<Object> postPaciente(@RequestBody PacienteForm pacienteForm){
-        Paciente paciente = pacienteForm.converte(pacienteForm,medicoService);
+    public ResponseEntity<Object> postPaciente(@RequestBody @Valid PacienteForm pacienteForm){
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(pacienteService.savePaciente(paciente));
+        Optional<Medico> optionalMedico = medicoService.findByNomeOptional(pacienteForm.getNomeMedico());
+
+        if(!optionalMedico.isPresent()){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Esse medico não está cadastrado no sistema, não foi possível cadastrar o paciente.");
+        }
+
+        Optional<Paciente> pacienteOptional = pacienteService.getPaciente(pacienteForm.getCpf());
+
+        if(!pacienteOptional.isPresent()){
+            Paciente paciente = pacienteForm.converte(medicoService);
+            return ResponseEntity.status(HttpStatus.CREATED).body(pacienteService.savePaciente(paciente));
+        } else if(!(pacienteOptional.get().getMedico().getNome().equalsIgnoreCase(pacienteForm.getNomeMedico()))){
+            Paciente paciente = pacienteForm.converte(medicoService);
+            return ResponseEntity.status(HttpStatus.CREATED).body(pacienteService.savePaciente(paciente));
+        }
+
+        return ResponseEntity.status(HttpStatus.CONFLICT).body("Paciente já cadastrado/O medico não existe");
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deletePaciente(@PathVariable Long id){
+
+        Optional<Paciente> optionalPaciente = pacienteService.getPacienteById(id);
+
+        if(optionalPaciente.isPresent()){
+            pacienteService.deletePaciente(id);
+            return ResponseEntity.status(HttpStatus.OK).body("Paciente removido com sucesso!");
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Esse paciente não existe!");
     }
 
 

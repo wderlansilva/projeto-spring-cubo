@@ -15,6 +15,9 @@ public class Paciente {
     private Long numero;
     @Column(length = 3, nullable = false)
     private Long idade;
+
+    @Column(length = 20, nullable = false)
+    private String cpf;
     @ManyToOne
     private Medico medico;
 
@@ -22,11 +25,20 @@ public class Paciente {
 
     }
 
-    public Paciente(String nome, Long numero, Long idade, Medico medico) {
+    public Paciente(String nome, Long numero, Long idade, String cpf, Medico medico) {
         this.nome = nome;
         this.numero = numero;
         this.idade = idade;
+        this.cpf = cpf;
         this.medico = medico;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public Long getId() {

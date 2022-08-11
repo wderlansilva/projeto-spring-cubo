@@ -39,4 +39,16 @@ public class PacienteService  {
     public Paciente savePaciente(Paciente paciente) {
         return pacienteRepository.save(paciente);
     }
+
+    public Optional<Paciente> getPaciente(String cpf) {
+        return pacienteRepository.findByCpf(cpf);
+    }
+
+    public Optional<Paciente> getPacienteById(Long id) {
+        return pacienteRepository.findById(id);
+    }
+
+    public void deletePaciente(Long id) {
+        pacienteRepository.deleteById(id);
+    }
 }
