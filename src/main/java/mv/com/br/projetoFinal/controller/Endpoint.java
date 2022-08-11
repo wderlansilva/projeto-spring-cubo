@@ -7,6 +7,7 @@ import mv.com.br.projetoFinal.model_entitys.Medico;
 import mv.com.br.projetoFinal.model_entitys.Paciente;
 import mv.com.br.projetoFinal.service.MedicoService;
 import mv.com.br.projetoFinal.service.PacienteService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -82,6 +83,23 @@ public class Endpoint {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Esse paciente não existe!");
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> putPaciente(@PathVariable Long id, @RequestBody @Valid PacienteForm pacienteForm) {
+
+        Optional<Paciente> optionalPaciente = pacienteService.getPacienteById(id);
+
+        if (!optionalPaciente.isPresent()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Esse paciente não existe!");
+        }
+
+        Paciente paciente = new Paciente();
+        BeanUtils.copyProperties(pacienteForm,paciente);
+
+        paciente.setId(optionalPaciente.get().getId());
+        paciente.setMedico(optionalPaciente.get().getMedico());
+
+        return ResponseEntity.status(HttpStatus.OK).body(pacienteService.savePaciente(paciente));
+    }
 
 
 
