@@ -14,7 +14,7 @@ public interface PacienteRepository extends JpaRepository<Paciente, Long> {
 
     Page<Paciente> findByNome(String nome, Pageable pageable);
 
-    List<Paciente> findByMedico_Nome(String nomeMedico);
+    Page<Paciente> findByMedico_Nome(String nomeMedico);
 
     Optional<Paciente> findByCpf(String cpf);
 }

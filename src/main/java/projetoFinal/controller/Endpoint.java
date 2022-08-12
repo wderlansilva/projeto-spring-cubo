@@ -47,15 +47,15 @@ public class Endpoint {
 
     }
 
-//    @GetMapping("/filter/medico")
-//    public Page<PacienteDto> getMedicoByNome(String nomeMedico, @PageableDefault(page = 0,size = 2,sort = "nome", direction = Sort.Direction.DESC) Pageable pageable){
-//
-//        if(nomeMedico != null){
-//            return PacienteDto.converter(pacienteService.searchMedicoByNome(nomeMedico));
-//        }
-//        return PacienteDto.converter(pacienteService.get(pageable));
-//
-//    }
+    @GetMapping("/filter/medico")
+    public Page<PacienteDto> getMedicoByNome(String nomeMedico, @PageableDefault(page = 0,size = 2,sort = "nome", direction = Sort.Direction.DESC) Pageable pageable){
+
+        if(nomeMedico != null){
+            return PacienteDto.converter(pacienteService.searchMedicoByNome(nomeMedico));
+        }
+        return PacienteDto.converter(pacienteService.get(pageable));
+
+    }
 
     @PostMapping
     @CacheEvict(value = "ListaPacientes", allEntries = true)

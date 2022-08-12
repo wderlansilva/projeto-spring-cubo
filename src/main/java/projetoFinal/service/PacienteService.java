@@ -32,7 +32,7 @@ public class PacienteService  {
         return pacienteRepository.findByNome(nome,pageable);
     }
 
-    public List<Paciente> searchMedicoByNome(String nomeMedico) {
+    public Page<Paciente> searchMedicoByNome(String nomeMedico) {
         return pacienteRepository.findByMedico_Nome(nomeMedico);
     }
 
